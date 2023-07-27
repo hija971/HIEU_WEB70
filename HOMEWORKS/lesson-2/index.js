@@ -35,10 +35,10 @@ app.get("/api/homeworks/todo-list", (req, res) => {
     const queryParams = req.query;
     const getTodoFields = todoList.map((field) => {
       if (Object.keys(queryParams).length !== 0) {
-        let mappingTodo = {};
+        let getField = {};
         for (const key in field) {
-          if (Number(queryParams[key])) {
-            mappingTodo[key] = field[key];
+          if (Number(queryParams[key]) && field[key]) {
+            getField[key] = field[key];
           } else if (Number(queryParams[key]) === 0) {
             const getNewField = {
               ...field,
@@ -46,14 +46,14 @@ app.get("/api/homeworks/todo-list", (req, res) => {
             for (const keyOfQuery in queryParams) {
               delete getNewField[keyOfQuery];
             }
-            mappingTodo = {
+            getField = {
               ...getNewField,
-            };
-          } else if (!Object.keys(field).includes(queryParams[key])) {
+            }
+          } else {
             return field
           }
         }
-        return mappingTodo;
+        return getField;
       } else {
         return field;
       }

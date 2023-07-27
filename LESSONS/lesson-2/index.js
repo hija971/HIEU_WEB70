@@ -1,5 +1,6 @@
 import express from "express";
 import crypto from "crypto";
+import { error } from "console";
 const app = express();
 app.use(express.json());
 
@@ -91,6 +92,40 @@ app.post("/api/v1/todo-list", (req, res) => {
     data: todoList,
   });
 });
+
+//put, delete
+app.put("/api/v1/todo-list/:id", (req, res) => {
+  try {
+    const fieldsUpdate = req.body;
+    const { id } = req.params;
+    const findTodoItem = todoList.find((item) => item.id === id);
+    if (!findTodoItem) throw new Error(`Can't find todo item with id: ${id}`);
+    for (const key in fieldsUpdate) {
+      if (findTodoItem[key] !== 'undefined') {
+        findTodoItem[key] = fieldsUpdate[key];
+      }
+      res.send(201).send({
+        data: todoList,
+        success: true,
+        message: 'SUCCESS',
+      })
+    }
+  } catch (error) {
+    res.status(404).send({
+      data: null,
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.delete("/api/v1/todo-list/:id", (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+})
 
 app.listen(5001, () => {
   console.log("My server is running!");
