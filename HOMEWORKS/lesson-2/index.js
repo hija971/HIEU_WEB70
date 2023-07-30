@@ -1,6 +1,7 @@
 import express from "express";
 import crypto from "crypto";
 const app = express();
+const PORT = 3001;
 
 const todoList = [
   {
@@ -34,20 +35,20 @@ app.get("/api/homeworks/todo-list", (req, res) => {
   try {
     const queryParams = req.query;
     const getTodoFields = todoList.map((field) => {
+      let getField = {};
       if (Object.keys(queryParams).length !== 0) {
-        let getField = {};
-        for (const key in field) {
+        for (const key in queryParams) {
           if (Number(queryParams[key]) && field[key]) {
             getField[key] = field[key];
           } else if (Number(queryParams[key]) === 0) {
-            const getNewField = {
+            const tempField = {
               ...field,
             };
             for (const keyOfQuery in queryParams) {
-              delete getNewField[keyOfQuery];
+              delete tempField[keyOfQuery];
             }
             getField = {
-              ...getNewField,
+              ...tempField,
             }
           } else {
             return field
@@ -79,6 +80,6 @@ app.get("/api/homeworks/todo-list/:id", (req, res) => {
   res.send({ data: findTodo, message: "SUCCESS", success: true });
 });
 
-app.listen(3001, () => {
-  console.log("Server is running...");
+app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
 });
