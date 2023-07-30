@@ -109,7 +109,7 @@ app.get("/api/v1/post/user/:userId", (req, res) => {
         -1
       );
     });
-    if (foundUser === -1 || !foundTitle || !foundContent) {
+    if (!foundUser || foundTitle.length === 0 || foundContent.length === 0) {
       res.status(400).send({
         data: null,
         message: "User or post not found",
