@@ -85,6 +85,48 @@ app.get("/api/v1/users", (req, res) => {
   });
 });
 
+//get all posts
+app.get("/api/v1/posts", (req, res) => {
+  res.status(200).send({
+    data: posts,
+    success: true,
+    message: "Got all posts",
+  });
+});
+
+//get posts by userId, search with title and content
+app.get("/api/v1/post/user/:userId", (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { postTitle, postContent } = req.query;
+    const foundUser = posts.find((user) => user.userId === userId);
+    const foundTitle = posts.filter((item) => {
+      return item.title.toLowerCase().indexOf(postTitle.toLowerCase()) !== -1;
+    });
+    const foundContent = posts.filter((item) => {
+      return (
+        item.body.content.toLowerCase().indexOf(postContent.toLowerCase()) !==
+        -1
+      );
+    });
+    if (foundUser === -1 || !foundTitle || !foundContent) {
+      res.status(400).send({
+        data: null,
+        message: "User or post not found",
+        success: false,
+      });
+    } else {
+      res.status(200).send({
+        data: foundUser,
+        message: "Post found",
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.send({ data: null, message: error.message, success: false });
+  }
+});
+
 //get all posts by users
 app.get("/api/v1/users/posts", (req, res) => {
   const postByUser = users.map((user) => {
@@ -227,7 +269,6 @@ app.delete("/api/v1/users/:id", (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);

@@ -48,7 +48,7 @@ app.get("/api/homeworks/users", (req, res) => {
 //get username query
 app.get("/api/homeworks/users", (req, res) => {
   try {
-    const username = req.query.username;
+    const { username } = req.query;
     console.log(username);
     const findUser = users.filter((item) => {
       return item.username.toLowerCase().indexOf(username.toLowerCase()) !== -1;
@@ -95,7 +95,7 @@ app.get("/api/homeworks/users/sort", (req, res) => {
 app.post("/api/homeworks/users", (req, res) => {
   try {
     const dataBody = req.body;
-    const { username } = dataBody
+    const { username } = dataBody;
     const existingUser = users.find((user) => user.username === username);
     if (existingUser) {
       return res.send({
@@ -111,7 +111,7 @@ app.post("/api/homeworks/users", (req, res) => {
     res.send({
       data: users,
       message: "User added",
-      success: true
+      success: true,
     });
   } catch (error) {
     res.send({ data: null, message: error.message, success: false });
