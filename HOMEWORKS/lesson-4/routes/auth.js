@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { users } from "../data/users.js";
 import { findUserByCredentials } from "../middlewares/findUser.js";
-import { checkUserRequirements } from "../middlewares/checkUser.js";
+import { checkUserRequirements } from "../middlewares/checkUserRequirements.js";
 import crypto from "crypto";
 
 const authRouter = Router();
@@ -22,9 +22,5 @@ authRouter.post("/register", checkUserRequirements, (req, res) => {
   });
   res.status(200).json({ data: users, message: "User registered successfully", apiKey: apiKey });
 });
-
-// authRouter.get("/", (req, res) => {
-//   console.log("Auth");
-// });
 
 export default authRouter;

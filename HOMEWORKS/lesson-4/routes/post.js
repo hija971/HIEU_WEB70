@@ -1,11 +1,30 @@
 import { Router } from "express";
-import { posts } from "../data/posts.js"
-import crypto from "crypto"
+import { posts } from "../data/posts.js";
+import { checkPostExist } from "../middlewares/checkPostExist.js";
+import { checkUser } from "../middlewares/checkUser.js";
+import { checkApiKey } from "../middlewares/checkAPIKey.js";
+import { handleViewer } from "../middlewares/handleViewer.js";
+import crypto from "crypto";
 
-const postRouter = Router()
+const postRouter = Router();
 
-// postRouter.get("/", (req, res)=>{
-//     console.log("Post")
-// })
+postRouter.get("/:id", checkPostExist, handleViewer, (req, res) => {
+  const { postIndex } = req;
+  res.status(200).send({
+    data: posts[postIndex],
+    success: true,
+    message: "Got post by ID",
+  });
+});
 
-export default postRouter
+postRouter.put("/:id", checkUser, checkPostExist, checkApiKey, (req, res) => {
+  const { postIndex } = req;
+  const { title, body } = req.body;
+
+  posts[postIndex].title = title;
+  posts[postIndex].body = body;
+
+  res.status(200).send(posts);
+});
+
+export default postRouter;
