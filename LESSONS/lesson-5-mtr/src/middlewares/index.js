@@ -29,5 +29,5 @@ export const middlewares = {
             message: error.message
         })
     }
-  },
+  }
 };

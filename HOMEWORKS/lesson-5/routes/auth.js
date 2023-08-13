@@ -1,9 +1,9 @@
 import { Router } from "express";
-import crypto from "crypto"
 import { users } from "../data/users.js";
-import { generateToken } from "../utils/index.js";
 import { findUserByCredentials } from "../middlewares/findUser.js";
-import { checkUserRequirements } from "../middlewares/checkUserReq.js";
+import { checkUserRequirements } from "../middlewares/checkUserReg.js";
+import { authenticateToken } from "../utils/index.js";
+import crypto from "crypto";
 
 const authRouter = Router();
 
@@ -13,19 +13,31 @@ authRouter.post("/login", findUserByCredentials, (req, res) => {
   });
 });
 
+authRouter.get("/user-info/:id", authenticateToken, (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = users.find((item) => item.id === id);
+    if (!userId) throw new Error("User not found");
+    res.status(200).send({
+      data: userId,
+      success: true
+    });
+  } catch (error) {
+    res.status(403).send({
+      data: null,
+      success: false,
+      message: error.message
+    })
+  }
+});
+
 authRouter.post("/register", checkUserRequirements, (req, res) => {
-  const { username, password, fullname } = req.newUser;
-  const id = crypto.randomUUID()
+  const id = crypto.randomUUID();
   users.push({
     id: id,
-    username: username,
-    password: password,
-    fullname: fullname,
-    token: generateToken({ userId: id }),
+    ...req.newUser,
   });
-  res
-    .status(200)
-    .json({ message: "User registered successfully" });
+  res.status(200).json({ message: "User registered successfully" });
 });
 
 export default authRouter;

@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const Collections = {
-  SMARTPHONE: "smartphones",
+  RESTAURANT: "restaurants",
 };
 
 const dbCollection = {};
@@ -10,8 +10,8 @@ const connectDb = async () => {
   await newClient.connect();
   const currentDB = newClient.db("WEB70");
 
-  dbCollection[Collections.SMARTPHONE] = currentDB.collection(
-    Collections.SMARTPHONE
+  dbCollection[Collections.RESTAURANT] = currentDB.collection(
+    Collections.RESTAURANT
   );
 };
 

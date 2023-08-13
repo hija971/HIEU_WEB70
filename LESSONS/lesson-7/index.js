@@ -4,11 +4,11 @@ import { connectDb } from "./database/index.js";
 
 const app = express();
 connectDb()
-const PORT = 5001;
 app.use(express.json());
 
-app.use("/api", RootRouterV1);
+const PORT = 5001;
+app.use("/api/v1", RootRouterV1);
 
 app.listen(PORT, () => {
-  console.log(`Server is running at PORT ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

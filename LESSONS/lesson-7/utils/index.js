@@ -1,4 +1,4 @@
-const resClientData = () => {
+const resClientData = (res, status, data, message) => {
   res.status(status).send({
     data: data ? data : null,
     success: !!data,
