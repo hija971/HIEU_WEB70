@@ -8,7 +8,7 @@ const PORT = 5001
 
 app.use(express.json())
 
-app.use("/workbook5", RootRouterV1)
+app.use("/api/v1", RootRouterV1)
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`)

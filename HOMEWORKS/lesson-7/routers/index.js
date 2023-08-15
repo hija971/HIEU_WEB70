@@ -1,10 +1,18 @@
 import { Router } from "express";
 import RestaurantRouter from "./restaurant.js";
-import demoRouter from "./aggregation.js";
+import AuthRouter from "./auth.js";
+import PostRouter from "./post.js";
+import UserRouter from "./user.js";
+// import demoRouter from "./aggregation.js";
 
-const RootRouterV1 = Router()
+const RootRouterV1 = Router();
 
-RootRouterV1.use("/restaurant", RestaurantRouter)
-RootRouterV1.use("/demo", demoRouter)
+RootRouterV1.use("/restaurant", RestaurantRouter);
+RootRouterV1.use("/auth", AuthRouter);
+RootRouterV1.use("/post", PostRouter);
+RootRouterV1.use("/user", UserRouter);
 
-export default RootRouterV1
+// RootRouterV1.use("/demo", demoRouter)
+// RootRouterV1.use("/croissant", croissantRouter)
+
+export default RootRouterV1;
