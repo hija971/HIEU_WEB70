@@ -1,4 +1,4 @@
-import User from "../models/user.js"
+import User from "../models/user.model.js"
 import { resClientData } from "../utils/index.js"
 
 const userController = {

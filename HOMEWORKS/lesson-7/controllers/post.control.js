@@ -1,4 +1,4 @@
-import Post from "../models/user.js"
+import Post from "../models/post.model.js"
 import { resClientData } from "../utils/index.js"
 
 const postController = {

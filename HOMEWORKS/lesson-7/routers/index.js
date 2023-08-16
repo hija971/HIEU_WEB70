@@ -1,8 +1,8 @@
 import { Router } from "express";
-import RestaurantRouter from "./restaurant.js";
-import AuthRouter from "./auth.js";
-import PostRouter from "./post.js";
-import UserRouter from "./user.js";
+import RestaurantRouter from "./restaurant.route.js";
+import AuthRouter from "./auth.route.js";
+import PostRouter from "./post.route.js";
+import UserRouter from "./user.route.js";
 // import demoRouter from "./aggregation.js";
 
 const RootRouterV1 = Router();

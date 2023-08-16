@@ -1,5 +1,5 @@
 import { Collections, dbCollection } from "../database/index.js";
-import mongodb, { ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 class Post {
   _id = new ObjectId();
   userId;
@@ -7,11 +7,11 @@ class Post {
   body;
   content;
   image;
+  liked;
 
   constructor(data) {
     this.userId = data.userId;
     this.title = data.title;
-    this.body = data.body;
     this.content = data.content;
     this.image = data.image;
   }
@@ -34,4 +34,4 @@ class Post {
   }
 }
 
-export default User;
+export default Post;

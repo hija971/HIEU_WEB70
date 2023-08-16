@@ -14,7 +14,7 @@ const resClientData = (res, status, data, message) => {
 
 const generateToken = (data) => {
   const token = jwt.sign(data, SECRET_KEY, {
-    expiresIn: 500,
+    expiresIn: "1h",
   });
   return token;
 };
@@ -40,8 +40,8 @@ const authenticateToken = (req, res, next) => {
         error: "Invalid token",
       });
     }
-    next();
   });
+  next();
 };
 
 export { resClientData, authenticateToken, generateToken };

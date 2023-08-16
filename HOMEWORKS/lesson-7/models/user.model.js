@@ -1,5 +1,5 @@
 import { Collections, dbCollection } from "../database/index.js";
-import mongodb, { ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 class User {
   _id = new ObjectId();
   username;
