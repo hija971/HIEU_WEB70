@@ -23,9 +23,9 @@ class Post {
       title: this.title,
       body: {
         content: this.content,
-        image: this.image
+        image: this.image,
       },
-      liked: 0
+      liked: 0,
     };
     const insertToDb = await dbCollection[Collections["POST"]].insertOne(
       createData

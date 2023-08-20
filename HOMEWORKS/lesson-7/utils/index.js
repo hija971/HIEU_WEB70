@@ -34,14 +34,27 @@ const authenticateToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, SECRET_KEY, (err) => {
+  jwt.verify(token, SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).send({
         error: "Invalid token",
       });
     }
+
+    const tokenUserId = decoded.userId;
+    const paramsUserId = req.params.userId;
+    if (tokenUserId !== paramsUserId) {
+      return res.status(403).send({
+        message: "Forbidden",
+      });
+    }
+    next();
+    //Since jwt.verify is an asynchronous operation, it takes some time to complete.
+    //Meanwhile, if next() is put outside of verify the code execution continues,
+    //it would be called before the verification is finished.
+    //By moving the next() function call inside the jwt.verify callback,
+    //you ensure that it is only invoked after the verification is completed and the authorization checks have passed.
   });
-  next();
 };
 
 export { resClientData, authenticateToken, generateToken };
