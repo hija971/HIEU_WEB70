@@ -6,7 +6,8 @@
       "onlyIncompleted": "Only incompleted"
     },
     "footer": {
-      "title": "Made by MindX 🔥"
+      "title": "Made by MindX 🔥",
+      "language": "Display language:"
     },
     "form": {
       "input": "Enter task...",
@@ -23,7 +24,8 @@
       "onlyIncompleted": "Công việc chưa hoàn thành"
     },
     "footer": {
-      "title": "Được thực hiện bởi MindX 🔥"
+      "title": "Được thực hiện bởi MindX 🔥",
+      "language": "Ngôn ngữ hiển thị:"
     },
     "form": {
       "input": "Nhập công việc...",
