@@ -55,6 +55,7 @@ body,
   font-weight: 100;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .not-complete-check {
@@ -128,4 +129,9 @@ body,
 
 .languague-picker.selected {
   opacity: 1;
+}
+
+.remaining-days{
+  font-size: medium;
+  margin-left: 20px;
 }

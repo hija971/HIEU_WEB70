@@ -1,30 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { LanguageContext } from "./LanguageContext.jsx";
+import translationData from "./translationData.json";
 
-const Header = ({setNotDone}) => {
+const Header = ({ setUnDone }) => {
   const [todos, setTodos] = useState([]);
-  const [showNotDone, setShowNotDone] = useState(false);
+  const [showUnDone, setShowUnDone] = useState(false);
+  const { language } = useContext(LanguageContext);
+  const translation = translationData[language].header;
 
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTodos(savedTasks);
-  }, []);
+  }, [todos]);
 
   const incompleteTasks = todos.filter((todo) => !todo.completed);
 
   const handleClickBox = (e) => {
-    setShowNotDone(e.target.checked);
-    setNotDone(e.target.checked)
+    setShowUnDone(e.target.checked);
+    setUnDone(e.target.checked);
   };
   return (
     <div className="header">
-      <span>You have {incompleteTasks.length} tasks left!</span>
+      {translation.leftTitle} {incompleteTasks.length} {translation.rightTitle}
       <span className="not-complete-check">
         <input
           type="checkbox"
-          checked={showNotDone}
+          checked={showUnDone}
           onChange={handleClickBox}
         />
-        <span className="not-complete-title">Not finished only</span>
+        <span className="not-complete-title">{translation.onlyIncompleted}</span>
       </span>
     </div>
   );

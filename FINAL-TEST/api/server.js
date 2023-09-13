@@ -1,15 +1,24 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import express from "express";
-import cors from "cors";
+import mongoose from "mongoose";
 import RootRouter from "./routers/index.js";
 
 const app = express();
+dotenv.config();
 
-const PORT = 5001;
-//connectDb() imported db function here
+//Connect to DB
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DB Connection Successful!"))
+  .catch((err) => console.log(err));
+
+const PORT = 8800;
+
 app.use(express.json());
-app.use(cors());
-app.use("/api/v1", RootRouter); //imported router here
+app.use("/api", RootRouter);
 
 app.listen(PORT, () => {
   console.log("Server is running on " + PORT);

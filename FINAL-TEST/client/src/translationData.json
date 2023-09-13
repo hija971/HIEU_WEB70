@@ -1,0 +1,36 @@
+{
+  "en": {
+    "header": {
+      "leftTitle": "You have",
+      "rightTitle": "tasks",
+      "onlyIncompleted": "Only incompleted"
+    },
+    "footer": {
+      "title": "Made by MindX 🔥"
+    },
+    "form": {
+      "input": "Enter task...",
+      "button": "Add"
+    },
+    "todoList": {
+      "days": "days remaining"
+    }
+  },
+  "vn": {
+    "header": {
+      "leftTitle": "Bạn còn",
+      "rightTitle": "công việc",
+      "onlyIncompleted": "Công việc chưa hoàn thành"
+    },
+    "footer": {
+      "title": "Được thực hiện bởi MindX 🔥"
+    },
+    "form": {
+      "input": "Nhập công việc...",
+      "button": "Thêm"
+    },
+    "todoList": {
+      "days": "ngày còn lại"
+    }
+  }
+}
